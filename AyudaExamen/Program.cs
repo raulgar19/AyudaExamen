@@ -7,8 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSession();
+builder.Services.AddMemoryCache();
+
 string connectionString = builder.Configuration.GetConnectionString("SqlLocal");
 builder.Services.AddDbContext<HospitalContext>(options => options.UseSqlServer(connectionString));
+
 
 builder.Services.AddTransient<RepositoryHospital>();
 
@@ -27,6 +31,8 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapStaticAssets();
 

@@ -1,8 +1,8 @@
 ﻿namespace AyudaExamen.Models
 {
-    public class SalasModel
+    public class SalaUniqueModel
     {
-        public List<Sala> Salas { get; set; }
+        public Sala Sala { get; set; }
         public int Registros { get; set; }
         public Hospital Hospital { get; set; }
     }

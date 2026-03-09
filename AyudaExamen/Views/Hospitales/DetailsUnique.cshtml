@@ -1,0 +1,54 @@
+﻿@model SalaUniqueModel
+
+@{
+    int primero = 1;
+    int anterior = (int)ViewData["ANTERIOR"];
+    int siguiente = (int)ViewData["SIGUIENTE"];
+    int ultimo = (int)ViewData["ULTIMO"];
+}
+
+<h1>Detalles del hospital</h1>
+
+<ul class="list-group mb-4">
+    <li class="list-group-item list-group-item-danger">Hospital Id: @Model.Hospital.IdHospital</li>
+    <li class="list-group-item list-group-item-info">Nombre: @Model.Hospital.Nombre</li>
+    <li class="list-group-item list-group-item-info">Dirección: @Model.Hospital.Direccion</li>
+    <li class="list-group-item list-group-item-info">Teléfono: @Model.Hospital.Telefono</li>
+    <li class="list-group-item list-group-item-info">Camas: @Model.Hospital.Camas</li>
+</ul>
+
+<hr />
+<ul class="list-group list-group-horizontal mb-3">
+    <li class="list-group-item">
+        <a asp-controller="Hospitales"
+           asp-action="DetailsUnique"
+           asp-route-posicion="@primero"
+           asp-route-idhospital="@Model.Hospital.IdHospital">Primero</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Hospitales"
+           asp-action="DetailsUnique"
+           asp-route-posicion="@anterior"
+           asp-route-idhospital="@Model.Hospital.IdHospital">Anterior</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Hospitales"
+           asp-action="DetailsUnique"
+           asp-route-posicion="@siguiente"
+           asp-route-idhospital="@Model.Hospital.IdHospital">Siguiente</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Hospitales"
+           asp-action="DetailsUnique"
+           asp-route-posicion="@ultimo"
+           asp-route-idhospital="@Model.Hospital.IdHospital">Último</a>
+    </li>
+</ul>
+<hr />
+<ul class="list-group">
+    <li class="list-group-item">
+        <strong>ID Sala:</strong> @Model.Sala.IdSala - 
+        <strong>Nombre:</strong> @Model.Sala.Nombre - 
+        <strong>Número de Camas:</strong> @Model.Sala.Camas
+    </li>
+</ul>

@@ -18,6 +18,6 @@ namespace AyudaExamen.Models
         public int Camas { get; set; }
 
         [Column("HOSPITAL_COD")]
-        public string HospitalId { get; set; }
+        public int HospitalId { get; set; }
     }
 }

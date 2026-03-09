@@ -1,0 +1,20 @@
+﻿@model List<Hospital>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Hospitales Unique
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark">
+        @foreach (Hospital hospital in Model)
+        {
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Hospitales"
+                   asp-action="DetailsUnique"
+                   asp-route-idhospital="@hospital.IdHospital">
+                    @hospital.Nombre
+                </a>
+            </li>
+        }
+    </ul>
+</li>

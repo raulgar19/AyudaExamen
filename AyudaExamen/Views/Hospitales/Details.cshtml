@@ -1,11 +1,56 @@
-﻿@model Hospital
+﻿@model SalasModel
+
+@{
+    int pagina = 1;
+    int numeroRegistros = (int)ViewData["NUMEROREGISTROS"];
+}
+
+
+@{
+    var hospital = cache.Get("hospital") as Hospital;
+    var hospitalSesion = Context.Session.GetObject<Hospital>("hospital");
+}
 
 <h1>Detalles del hospital</h1>
 
-<ul class="list-group">
-    <li class="list-group-item list-group-item-danger">Hospital Id: @Model.IdHospital</li>
-    <li class="list-group-item list-group-item-info">Nombre: @Model.Nombre</li>
-    <li class="list-group-item list-group-item-info">Dirección: @Model.Direccion</li>
-    <li class="list-group-item list-group-item-info">Teléfono: @Model.Telefono</li>
-    <li class="list-group-item list-group-item-info">Camas: @Model.Camas</li>
+<ul class="list-group mb-4">
+    <li class="list-group-item list-group-item-danger">Hospital Id: @Model.Hospital.IdHospital</li>
+    <li class="list-group-item list-group-item-info">Nombre: @Model.Hospital.Nombre</li>
+    <li class="list-group-item list-group-item-info">Dirección: @Model.Hospital.Direccion</li>
+    <li class="list-group-item list-group-item-info">Teléfono: @Model.Hospital.Telefono</li>
+    <li class="list-group-item list-group-item-info">Camas: @Model.Hospital.Camas</li>
 </ul>
+
+<hr />
+<ul class="list-group list-group-horizontal">
+    @for (int i = 1; i <= numeroRegistros; i += 2)
+    {
+        <li class="list-group-item">
+            <a asp-controller="Hospitales"
+               asp-action="Details"
+               asp-route-posicion="@i"
+               asp-route-idhospital="@Model.Hospital.IdHospital">Página @pagina</a>
+        </li>
+        pagina++;
+    }
+</ul>
+<hr />
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID Sala</th>
+            <th>Nombre</th>
+            <th>Número de Camas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sala in Model.Salas)
+        {
+            <tr>
+                <td>@sala.IdSala</td>
+                <td>@sala.Nombre</td>
+                <td>@sala.Camas</td>
+            </tr>
+        }
+    </tbody>
+</table>
