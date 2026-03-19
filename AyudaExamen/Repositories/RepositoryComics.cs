@@ -43,7 +43,9 @@ namespace AyudaExamen.Repositories
 
         public async Task<int> GetRegistrosAsync(int id)
         {
-            return await this.context.Imagenes.Where(z => z.Id == id).CountAsync();
+            return await this.context.Imagenes
+                .Where(z => z.ComicId == id)
+                .CountAsync();
         }
 
         public async Task<Imagen> GetImagenByPosicionAsync(int id, int posicion)

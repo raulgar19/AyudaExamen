@@ -52,13 +52,13 @@ namespace AyudaExamen.Controllers
 
             Comic comic = await this.repo.FindComicAsync(id);
 
-            // Imagen imagen = await this.repo.GetImagenByPosicionAsync(id, posicion.Value);
+            Imagen imagen = await this.repo.GetImagenByPosicionAsync(id, posicion.Value);
 
             ComicImageSimpleModel model = new ComicImageSimpleModel
             {
                 Registros = numeroRegistros,
                 Comic = comic,
-                //  Imagen = imagen
+                Imagen = imagen
             };
 
             return View(model);

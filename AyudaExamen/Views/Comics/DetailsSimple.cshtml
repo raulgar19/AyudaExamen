@@ -46,4 +46,11 @@
     </li>
 </ul>
 <hr />
-<img src="@Model.Imagen.Url" style="width: 400px; height:auto;" />
+@if (Model.Imagen != null)
+{
+    <img src="@Model.Imagen.Url" style="width: 400px; height:auto;" />
+}
+else
+{
+    <p>No hay imagen disponible para esta posición.</p>
+}

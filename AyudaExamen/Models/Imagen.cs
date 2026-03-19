@@ -7,8 +7,11 @@ namespace AyudaExamen.Models
     public class Imagen
     {
         [Key]
-        [Column("comic_id")]
+        [Column("id")]
         public int Id { get; set; }
+
+        [Column("comic_id")]
+        public int ComicId { get; set; }
 
         [Column("imagen_url")]
         public string Url { get; set; }
