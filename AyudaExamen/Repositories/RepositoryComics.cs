@@ -1,6 +1,5 @@
 ﻿using AyudaExamen.Data;
 using AyudaExamen.Models;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace AyudaExamen.Repositories
@@ -46,17 +45,17 @@ namespace AyudaExamen.Repositories
             return await this.context.Imagenes.Where(z => z.Id == id).CountAsync();
         }
 
-        public async Task<Imagen> GetImagenByPosicionAsync(int id, int posicion)
-        {
-            string sql = "SP_IMAGEN_COMIC @ID, @POSICION";
-            SqlParameter pamIdZapatilla = new SqlParameter("@ID", id);
-            SqlParameter pamPosicion = new SqlParameter("@POSICION", posicion);
+        //public async Task<Imagen> GetImagenByPosicionAsync(int id, int posicion)
+        //{
+        //    string sql = "SP_IMAGEN_COMIC @ID, @POSICION";
+        //    SqlParameter pamIdZapatilla = new SqlParameter("@ID", id);
+        //    SqlParameter pamPosicion = new SqlParameter("@POSICION", posicion);
 
-            var consulta = await this.context.Imagenes.FromSqlRaw(sql, pamIdZapatilla, pamPosicion).ToListAsync();
+        //    var consulta = await this.context.Imagenes.FromSqlRaw(sql, pamIdZapatilla, pamPosicion).ToListAsync();
 
-            ImagenZapatilla imagen = consulta.FirstOrDefault();
+        //    ImagenZapatilla imagen = consulta.FirstOrDefault();
 
-            return imagen;
-        }
+        //    return imagen;
+        //}
     }
 }

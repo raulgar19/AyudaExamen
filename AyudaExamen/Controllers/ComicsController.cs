@@ -1,4 +1,5 @@
-﻿using AyudaExamen.Models;
+﻿using AyudaExamen.Helpers;
+using AyudaExamen.Models;
 using AyudaExamen.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,11 @@ namespace AyudaExamen.Controllers
     {
         private RepositoryComics repo;
 
+
         public ComicsController(RepositoryComics repo)
         {
             this.repo = repo;
+
         }
 
         public async Task<IActionResult> Index()
@@ -49,13 +52,13 @@ namespace AyudaExamen.Controllers
 
             Comic comic = await this.repo.FindComicAsync(id);
 
-            Imagen imagen = await this.repo.GetImagenByPosicionAsync(id, posicion.Value);
+            // Imagen imagen = await this.repo.GetImagenByPosicionAsync(id, posicion.Value);
 
             ComicImageSimpleModel model = new ComicImageSimpleModel
             {
                 Registros = numeroRegistros,
                 Comic = comic,
-                Imagen = imagen
+                //  Imagen = imagen
             };
 
             return View(model);
@@ -71,6 +74,46 @@ namespace AyudaExamen.Controllers
 
 
             return View(model);
+        }
+        public async Task<IActionResult> GetCarritoSession()
+        {
+            List<int> comicsId = SessionHelper.GetCarrito(HttpContext.Session);
+            if (comicsId != null)
+            {
+                List<Comic> comics = new List<Comic>();
+                foreach (int id in comicsId)
+                {
+                    Comic comic = await this.repo.FindComicAsync(id);
+
+                    if (comic != null)
+                    {
+                        comics.Add(comic);
+
+                    }
+                }
+                return View(comics);
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+
+        public async Task<IActionResult> AddToCarritoSesion(int id)
+        {
+
+            List<int> comicsId = SessionHelper.GetCarrito(HttpContext.Session);
+            if (comicsId == null)
+            {
+                comicsId = new List<int>();
+            }
+            if (!comicsId.Contains(id))
+            {
+                comicsId.Add(id);
+                SessionHelper.SetCarrito(HttpContext.Session, comicsId);
+            }
+            return RedirectToAction("Index");
         }
     }
 }
