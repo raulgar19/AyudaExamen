@@ -21,6 +21,27 @@ namespace AyudaExamen.Repositories
 
     //    WHERE QUERY.posicion = @posicion
     //GO
+
+    //CREATE PROCEDURE SP_IMAGENES_COMIC
+    //@id       INT,
+    //@posicion INT
+    //AS
+    //    SELECT
+    //        QUERY.id,
+    //        QUERY.comic_id,
+    //        QUERY.imagen_url
+    //    FROM(
+    //        SELECT
+    //            ROW_NUMBER() OVER (ORDER BY id) AS posicion,
+    //            id,
+    //            comic_id,
+    //            imagen_url
+    //        FROM imagenes
+    //        WHERE comic_id = @id
+    //    ) AS QUERY
+    //    WHERE QUERY.posicion >= @posicion
+    //      AND QUERY.posicion<(@posicion + 2);
+    //    GO
     #endregion
 
     public class RepositoryComics
@@ -50,15 +71,26 @@ namespace AyudaExamen.Repositories
 
         public async Task<Imagen> GetImagenByPosicionAsync(int id, int posicion)
         {
-            string sql = "SP_IMAGEN_COMIC @id, @posicion";
-            SqlParameter pamIdComic = new SqlParameter("@id", id);
+            string sql = "SP_IMAGEN_COMIC @posicion, @id";
             SqlParameter pamPosicion = new SqlParameter("@posicion", posicion);
+            SqlParameter pamIdComic = new SqlParameter("@id", id);
 
             var consulta = await this.context.Imagenes.FromSqlRaw(sql, pamIdComic, pamPosicion).ToListAsync();
 
             Imagen imagen = consulta.FirstOrDefault();
 
             return imagen;
+        }
+
+        public async Task<List<Imagen>> GetImagenesAsync(int id, int posicion)
+        {
+            string sql = "SP_IMAGENES_COMIC @id, @posicion";
+            SqlParameter pamIdComic = new SqlParameter("@id", id);
+            SqlParameter pamPosicion = new SqlParameter("@posicion", posicion);
+
+            var consulta = this.context.Imagenes.FromSqlRaw(sql, pamIdComic, pamPosicion);
+
+            return await consulta.ToListAsync();
         }
     }
 }

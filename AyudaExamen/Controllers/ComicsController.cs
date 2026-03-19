@@ -64,17 +64,29 @@ namespace AyudaExamen.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> DetailsComplejo(int id)
+        public async Task<IActionResult> DetailsComplejo(int? posicion, int id)
         {
+            if (posicion == null)
+            {
+                posicion = 1;
+            }
 
-            ComicImagesComplejoModel model = new ComicImagesComplejoModel();
+            int numRegistros = await this.repo.GetRegistrosAsync(id);
 
-            model.Comic = await this.repo.FindComicAsync(id);
-            model.Registros = await this.repo.GetRegistrosAsync(id);
+            ViewData["REGISTROS"] = numRegistros;
 
+            Comic comic = await this.repo.FindComicAsync(id);
+            List<Imagen> imagenes = await this.repo.GetImagenesAsync(id, posicion.Value);
+
+            ComicImagesComplejoModel model = new ComicImagesComplejoModel
+            {
+                Comic = await this.repo.FindComicAsync(id),
+                Imagenes = imagenes
+            };
 
             return View(model);
         }
+
         public async Task<IActionResult> GetCarritoSession()
         {
             List<int> comicsId = SessionHelper.GetCarrito(HttpContext.Session);
