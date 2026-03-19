@@ -20,10 +20,51 @@ namespace AyudaExamen.Controllers
             return View(comics);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> DetailsSimple(int? posicion, int id)
+        {
+            if (posicion == null)
+            {
+                posicion = 1;
+            }
+
+            int numeroRegistros = await this.repo.GetRegistrosAsync(id);
+            int siguiente = posicion.Value + 1;
+
+            if (siguiente > numeroRegistros)
+            {
+                siguiente = numeroRegistros;
+            }
+
+            int anterior = posicion.Value - 1;
+
+            if (anterior < 1)
+            {
+                anterior = 1;
+            }
+
+            ViewData["SIGUIENTE"] = siguiente;
+            ViewData["ANTERIOR"] = anterior;
+            ViewData["ULTIMO"] = numeroRegistros;
+            ViewData["POSICION"] = posicion;
+
+            Comic comic = await this.repo.FindComicAsync(id);
+
+            Imagen imagen = await this.repo.GetImagenByPosicionAsync(id, posicion.Value);
+
+            ComicImageSimpleModel model = new ComicImageSimpleModel
+            {
+                Registros = numeroRegistros,
+                Comic = comic,
+                Imagen = imagen
+            };
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> DetailsComplejo(int id)
         {
 
-            ComicImagesModel model = new ComicImagesModel();
+            ComicImagesComplejoModel model = new ComicImagesComplejoModel();
 
             model.Comic = await this.repo.FindComicAsync(id);
             model.Registros = await this.repo.GetRegistrosAsync(id);

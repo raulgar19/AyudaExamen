@@ -1,6 +1,6 @@
 ﻿namespace AyudaExamen.Models
 {
-    public class ComicImagesModel
+    public class ComicImagesComplejoModel
     {
         public int Registros { get; set; }
 

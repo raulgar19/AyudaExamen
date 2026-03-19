@@ -1,0 +1,18 @@
+﻿@model ComicImageSimpleModel
+
+@{
+    int primero = 1;
+    int anterior = (int)ViewData["ANTERIOR"];
+    int siguiente = (int)ViewData["SIGUIENTE"];
+    int ultimo = (int)ViewData["ULTIMO"];
+    int posicion = (int)ViewData["POSICION"];
+}
+
+<h1>Detalles de @Model.Comic.Name</h1>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Id:</strong> @Model.Comic.Id</li>
+    <li class="list-group-item"><strong>Title:</strong> @Model.Comic.Name</li>
+    <li class="list-group-item"><strong>Author:</strong> @Model.Comic.Author</li>
+    <li class="list-group-item"><strong>Year:</strong> @Model.Comic.Year</li>
+</ul>

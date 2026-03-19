@@ -26,5 +26,10 @@ namespace AyudaExamen.Repositories
         {
             return await this.context.Imagenes.Where(z => z.Id == id).CountAsync();
         }
+
+        public async Task<Imagen> GetImagenByPosicionAsync(int id, int value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
