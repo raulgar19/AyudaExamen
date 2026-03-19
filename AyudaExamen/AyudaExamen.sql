@@ -19,6 +19,7 @@ CREATE TABLE comics (
 );
 
 CREATE TABLE imagenes (
+    id INT PRIMARY KEY,
     comic_id INT REFERENCES comics(id) ON DELETE CASCADE,
     imagen_url VARCHAR(255) NOT NULL
 );
@@ -28,13 +29,13 @@ INSERT INTO comics (id, nombre, autor, anio, descripcion) VALUES
 (2, 'Watchmen', 'Alan Moore', 1986, 'El asesinato de un antiguo compañero obliga a un grupo de vigilantes retirados a salir de las sombras.'),
 (3, 'Spider-Man: La última cacería de Kraven', 'J.M. DeMatteis', 1987, 'Kraven el Cazador busca su victoria definitiva sobre Spider-Man.');
 
-INSERT INTO imagenes (comic_id, imagen_url) VALUES 
-(1, 'https://covers.openlibrary.org/b/isbn/9781563893421-L.jpg'),
-(1, 'https://covers.openlibrary.org/b/isbn/9781401263119-L.jpg'),
-(1, 'https://covers.openlibrary.org/b/isbn/9781852867980-L.jpg'),
-(2, 'https://covers.openlibrary.org/b/isbn/9781401248192-L.jpg'),
-(2, 'https://covers.openlibrary.org/b/isbn/9788418225710-L.jpg'),
-(2, 'https://covers.openlibrary.org/b/isbn/9788416518968-L.jpg'),
-(3, 'https://covers.openlibrary.org/b/isbn/9780785134503-L.jpg'),
-(3, 'https://covers.openlibrary.org/b/isbn/9781302923747-L.jpg'),
-(3, 'https://covers.openlibrary.org/b/isbn/9781302911843-L.jpg');
+INSERT INTO imagenes (id, comic_id, imagen_url) VALUES 
+(1, 1, 'https://covers.openlibrary.org/b/isbn/9781563893421-L.jpg'),
+(2, 1, 'https://covers.openlibrary.org/b/isbn/9781401263119-L.jpg'),
+(3, 1, 'https://covers.openlibrary.org/b/isbn/9781852867980-L.jpg'),
+(4, 2, 'https://covers.openlibrary.org/b/isbn/9781401248192-L.jpg'),
+(5, 2, 'https://covers.openlibrary.org/b/isbn/9788418225710-L.jpg'),
+(6, 2, 'https://covers.openlibrary.org/b/isbn/9788416518968-L.jpg'),
+(7, 3, 'https://covers.openlibrary.org/b/isbn/9780785134503-L.jpg'),
+(8, 3, 'https://covers.openlibrary.org/b/isbn/9781302923747-L.jpg'),
+(9, 3, 'https://covers.openlibrary.org/b/isbn/9781302911843-L.jpg');

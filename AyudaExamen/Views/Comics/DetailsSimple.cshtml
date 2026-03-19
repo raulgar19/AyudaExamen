@@ -16,3 +16,34 @@
     <li class="list-group-item"><strong>Author:</strong> @Model.Comic.Author</li>
     <li class="list-group-item"><strong>Year:</strong> @Model.Comic.Year</li>
 </ul>
+
+<hr />
+<h3>Imagen @posicion de @ultimo</h3>
+<ul class="list-group list-group-horizontal mb-3">
+    <li class="list-group-item">
+        <a asp-controller="Zapatillas"
+           asp-action="Details"
+           asp-route-posicion="@primero"
+           asp-route-idzapatilla="@Model.Comic.Id">Primero</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Zapatillas"
+           asp-action="Details"
+           asp-route-posicion="@anterior"
+           asp-route-idzapatilla="@Model.Comic.Id">Anterior</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Zapatillas"
+           asp-action="Details"
+           asp-route-posicion="@siguiente"
+           asp-route-idzapatilla="@Model.Comic.Id">Siguiente</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Zapatillas"
+           asp-action="Details"
+           asp-route-posicion="@ultimo"
+           asp-route-idzapatilla="@Model.Comic.Id">Último</a>
+    </li>
+</ul>
+<hr />
+<img src="@Model.Imagen.Url" style="width: 400px; height:auto;" />

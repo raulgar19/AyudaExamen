@@ -11,6 +11,6 @@ namespace AyudaExamen.Models
         public int Id { get; set; }
 
         [Column("imagen_url")]
-        public string Ürl { get; set; }
+        public string Url { get; set; }
     }
 }
