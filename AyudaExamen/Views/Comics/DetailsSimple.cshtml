@@ -21,28 +21,28 @@
 <h3>Imagen @posicion de @ultimo</h3>
 <ul class="list-group list-group-horizontal mb-3">
     <li class="list-group-item">
-        <a asp-controller="Zapatillas"
-           asp-action="Details"
+        <a asp-controller="Comics"
+           asp-action="DetailsSimple"
            asp-route-posicion="@primero"
-           asp-route-idzapatilla="@Model.Comic.Id">Primero</a>
+           asp-route-id="@Model.Comic.Id">Primero</a>
     </li>
     <li class="list-group-item">
-        <a asp-controller="Zapatillas"
-           asp-action="Details"
+        <a asp-controller="Comics"
+           asp-action="DetailsSimple"
            asp-route-posicion="@anterior"
-           asp-route-idzapatilla="@Model.Comic.Id">Anterior</a>
+           asp-route-id="@Model.Comic.Id">Anterior</a>
     </li>
     <li class="list-group-item">
-        <a asp-controller="Zapatillas"
-           asp-action="Details"
+        <a asp-controller="Comics"
+           asp-action="DetailsSimple"
            asp-route-posicion="@siguiente"
-           asp-route-idzapatilla="@Model.Comic.Id">Siguiente</a>
+           asp-route-id="@Model.Comic.Id">Siguiente</a>
     </li>
     <li class="list-group-item">
-        <a asp-controller="Zapatillas"
-           asp-action="Details"
+        <a asp-controller="Comics"
+           asp-action="DetailsSimple"
            asp-route-posicion="@ultimo"
-           asp-route-idzapatilla="@Model.Comic.Id">Último</a>
+           asp-route-id="@Model.Comic.Id">Último</a>
     </li>
 </ul>
 <hr />

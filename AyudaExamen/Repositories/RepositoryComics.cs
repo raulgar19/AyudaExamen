@@ -6,20 +6,20 @@ using Microsoft.EntityFrameworkCore;
 namespace AyudaExamen.Repositories
 {
     #region PROCEDURES
-    //CREATE PROCEDURE SP_IMAGENES_ZAPATILLAS
-    //(@ID INT, @POSICION INT)
+    //CREATE PROCEDURE SP_IMAGEN_COMIC
+    //(@id INT, @posicion INT)
     //AS
     //    SELECT id, comic_id, imagen_url FROM
     //        (SELECT CAST(
-    //            ROW_NUMBER() OVER(ORDER BY IDIMAGEN) AS INT) 
-    //   AS POSICION,
-    //            IDIMAGEN, IDPRODUCTO, IMAGEN
+    //            ROW_NUMBER() OVER(ORDER BY id) AS INT) 
+    //   AS posicion,
+    //            id, comic_id, imagen_url
 
-    //        FROM IMAGENESZAPASPRACTICA
+    //        FROM imagenes
 
-    //        WHERE IDPRODUCTO = @IDPRODUCTO) AS QUERY
+    //        WHERE comic_id = @id) AS QUERY
 
-    //    WHERE QUERY.POSICION = @POSICION
+    //    WHERE QUERY.posicion = @posicion
     //GO
     #endregion
 
@@ -48,13 +48,13 @@ namespace AyudaExamen.Repositories
 
         public async Task<Imagen> GetImagenByPosicionAsync(int id, int posicion)
         {
-            string sql = "SP_IMAGEN_COMIC @ID, @POSICION";
-            SqlParameter pamIdZapatilla = new SqlParameter("@ID", id);
-            SqlParameter pamPosicion = new SqlParameter("@POSICION", posicion);
+            string sql = "SP_IMAGEN_COMIC @id, @posicion";
+            SqlParameter pamIdComic = new SqlParameter("@id", id);
+            SqlParameter pamPosicion = new SqlParameter("@posicion", posicion);
 
-            var consulta = await this.context.Imagenes.FromSqlRaw(sql, pamIdZapatilla, pamPosicion).ToListAsync();
+            var consulta = await this.context.Imagenes.FromSqlRaw(sql, pamIdComic, pamPosicion).ToListAsync();
 
-            ImagenZapatilla imagen = consulta.FirstOrDefault();
+            Imagen imagen = consulta.FirstOrDefault();
 
             return imagen;
         }
