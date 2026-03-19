@@ -21,5 +21,10 @@ namespace AyudaExamen.Repositories
         {
             return await this.context.Comics.FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task<int> GetRegistrosAsync(int id)
+        {
+            return await this.context.Imagenes.Where(z => z.Id == id).CountAsync();
+        }
     }
 }

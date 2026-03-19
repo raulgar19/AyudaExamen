@@ -8,5 +8,6 @@ namespace AyudaExamen.Data
         public ComicsContext(DbContextOptions<ComicsContext> options) : base(options) { }
 
         public DbSet<Comic> Comics { get; set; }
+        public DbSet<Comic> Imagenes { get; set; }
     }
 }

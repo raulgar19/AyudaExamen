@@ -22,9 +22,14 @@ namespace AyudaExamen.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            Comic comic = await this.repo.FindComicAsync(id);
 
-            return View(comic);
+            ComicImagesModel model = new ComicImagesModel();
+
+            model.Comic = await this.repo.FindComicAsync(id);
+            model.Registros = await this.repo.GetRegistrosAsync(id);
+
+
+            return View(model);
         }
     }
 }
