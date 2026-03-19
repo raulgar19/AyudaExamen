@@ -20,6 +20,7 @@
                 <td>@comic.Year</td>
                 <td>
                     <a asp-controller="Comics" asp-action="DetailsSimple" asp-route-id="@comic.Id" class="btn btn-info">Details Simple</a>
+                    <a asp-controller="Comics" asp-action="DetailsComplejo" asp-route-id="@comic.Id" class="btn btn-info">Details Complejo</a>
                     <a asp-controller="Comics" asp-action="AddToCarritoSesion" asp-route-id="@comic.Id" class="btn btn-info">Add to Carrito</a>
                     <a asp-controller="favoritos" asp-action="AddFavorito" asp-route-id="@comic.Id" class="btn btn-info">Add to FAvorito</a>
                 </td>

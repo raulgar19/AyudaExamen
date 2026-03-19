@@ -1,0 +1,37 @@
+﻿@model ComicImagesComplejoModel
+
+@{
+    int numPagina = 1;
+    int numRegistros = (int)ViewData["REGISTROS"];
+}
+
+<h1>Detalles de @Model.Comic.Name</h1>
+
+<ul class="list-group list-group-horizontal">
+    @for (int i = 1; i <= numRegistros; i += 2)
+    {
+        <li class="list-group-item">
+            <a asp-controller="Comics"
+               asp-action="DetailsComplejo"
+               asp-route-id="@Model.Comic.Id"
+               asp-route-posicion="@i">@numPagina</a>
+        </li>
+
+        numPagina++;
+    }
+</ul>
+
+<hr />
+@if (Model.Imagenes != null && Model.Imagenes.Any())
+{
+    <div class="d-flex flex-wrap gap-3">
+        @foreach (var img in Model.Imagenes)
+        {
+            <img src="@img.Url" style="width: 200px; height:auto;" />
+        }
+    </div>
+}
+else
+{
+    <p>No hay imágenes para esta página.</p>
+}
