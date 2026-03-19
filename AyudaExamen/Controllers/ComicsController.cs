@@ -127,10 +127,11 @@ namespace AyudaExamen.Controllers
             }
             return RedirectToAction("Index");
         }
+
         public async Task<IActionResult> LimpiarCarritoSession()
         {
             SessionHelper.LimpiarCarrito(HttpContext.Session);
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
