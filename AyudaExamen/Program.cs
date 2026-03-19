@@ -11,7 +11,12 @@ options.EnableEndpointRouting = false)
     .AddSessionStateTempDataProvider();
 
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession();
+builder.Services.AddSession(options =>
+{
+
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+});
+builder.Services.AddMemoryCache();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;

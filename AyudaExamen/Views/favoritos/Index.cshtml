@@ -1,0 +1,17 @@
+﻿@model List<Comic>
+
+<h2>Comics Favoritos</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var comic in Model)
+        {
+            <li>@comic.Name</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No tienes comics favoritos.</p>
+}
