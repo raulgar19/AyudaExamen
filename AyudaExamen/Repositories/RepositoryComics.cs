@@ -92,5 +92,52 @@ namespace AyudaExamen.Repositories
 
             return await consulta.ToListAsync();
         }
+
+        public async Task<AllPedidosInfo> GetPedidoInfo(int id)
+        {
+            //un pedido puede tener mas de un comic,por lo tanto como cada comic se guarda en una fila nueva de registro no puedo coger solo firstOrdefault
+            //, tengo que coger todos los registros que tengan el mismo pedidoId
+            var pedidos = await this.context.Pedidos
+                .Where(p => p.PedidoId == id)
+                .ToListAsync();
+
+            var comicIds = pedidos.Select(p => p.ComicId).ToList();
+            var comics = await this.context.Comics
+                .Where(c => comicIds.Contains(c.Id))
+                .ToListAsync();
+
+            AllPedidosInfo info = new AllPedidosInfo
+            {
+                PedidoId = id,
+                Comic = comics
+            };
+
+            return info;
+        }
+
+        public async Task<int> CreatePedido(int usuarioId, List<int> comicIds)
+        {
+            // Obtener el máximo PedidoId de la BD, si la tabla está vacía usar 0 (para sumarle 1)
+            int maxPedidoId = await this.context.Pedidos
+                .DefaultIfEmpty()
+                .MaxAsync(p => (int?)p.PedidoId) ?? 0;
+
+            int nuevoPedidoId = maxPedidoId + 1;
+
+            // Crear un registro Pedido por cada comic
+            foreach (int comicId in comicIds)
+            {
+                Pedido pedido = new Pedido
+                {
+                    PedidoId = nuevoPedidoId,
+                    UsuarioId = usuarioId,
+                    ComicId = comicId
+                };
+                this.context.Pedidos.Add(pedido);
+            }
+
+            await this.context.SaveChangesAsync();
+            return nuevoPedidoId; // Retorna el PedidoId creado
+        }
     }
 }

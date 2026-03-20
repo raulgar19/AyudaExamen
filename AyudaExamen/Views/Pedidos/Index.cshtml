@@ -1,0 +1,21 @@
+﻿@model AllPedidosInfo
+
+@{
+    ViewData["Title"] = "Pedidos";
+}
+
+<h1>Pedidos</h1>
+
+@if(Model.Comic != null && Model.Comic.Count > 0)
+{
+    <ul>
+        @foreach(var comic in Model.Comic)
+        {
+            <li>@comic.Name</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No hay cómics en este pedido.</p>
+}

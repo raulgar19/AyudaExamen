@@ -103,6 +103,7 @@ namespace AyudaExamen.Controllers
 
                     }
                 }
+                ViewData["COMICSID"] = comicsId;
                 return View(comics);
             }
             else

@@ -1,4 +1,17 @@
-﻿@model List<Comic>
+﻿@using AyudaExamen.Helpers
+@model List<Comic>
+
+@{
+    List<int> Comicids;
+    if (ViewData["COMICSID"] != null)
+    {
+        Comicids = ViewData["COMICSID"] as List<int>;
+    }
+    else
+    {
+        Comicids = new List<int>();
+    }
+}
 
 <h1>Carrito Session</h1>
 
@@ -32,4 +45,13 @@ else
         }
     </tbody>
 </table>
+
+    <form asp-area="" asp-controller="Pedidos" asp-action="CreatePedido" method="post">
+        <input type="hidden" name="usuarioId" value="1" />
+        @for (int i = 0; i < Comicids.Count; i++)
+        {
+            <input type="hidden" name="comicIds" value="@Comicids[i]" />
+        }
+        <button type="submit" class="btn btn-primary">Crear Pedido</button>
+    </form>
 }
