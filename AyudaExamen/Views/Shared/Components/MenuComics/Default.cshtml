@@ -1,0 +1,13 @@
+﻿@model List<Comic>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Comics
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark">
+        @foreach (Comic comic in Model)
+        {
+            <li><a class="dropdown-item" asp-controller="Comics" asp-action="DetailsSimple" asp-route-id="@comic.Id">@comic.Name</a></li>
+        }
+    </ul>
+</li>
