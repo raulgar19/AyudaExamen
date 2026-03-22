@@ -41,7 +41,7 @@ namespace AyudaExamen.Repositories
     //    ) AS QUERY
     //    WHERE QUERY.posicion >= @posicion
     //      AND QUERY.posicion<(@posicion + 2);
-    //    GO
+    //GO
     #endregion
 
     public class RepositoryComics
@@ -138,6 +138,13 @@ namespace AyudaExamen.Repositories
 
             await this.context.SaveChangesAsync();
             return nuevoPedidoId; // Retorna el PedidoId creado
+        }
+
+        public async Task<Usuario> LogInUsuarioAsync(string email)
+        {
+            Usuario usuario = await this.context.Usuarios.FirstOrDefaultAsync(z => z.Email == email);
+
+            return usuario;
         }
     }
 }

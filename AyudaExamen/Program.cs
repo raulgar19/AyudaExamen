@@ -2,6 +2,7 @@ using AyudaExamen.Data;
 using AyudaExamen.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,8 +33,16 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("SOLOJEFES", policy =>
-        policy.RequireRole("PRESIDENTE", "DIRECTOR", "ANALISTA"));
+    options.AddPolicy("CreatePedido", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+
+        policy.RequireAssertion(context =>
+        {
+            var role = context.User.FindFirstValue(ClaimTypes.Role);
+            return role != "admin";
+        });
+    });
 });
 
 string connectionString = builder.Configuration.GetConnectionString("SqlLocal");

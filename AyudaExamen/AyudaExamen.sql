@@ -7,7 +7,8 @@ CREATE TABLE usuarios (
     nombre VARCHAR(50) NOT NULL,
     correo VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    salt VARCHAR(255) NOT NULL
+    salt VARCHAR(255) NOT NULL,
+    rol VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE comics (
@@ -33,8 +34,9 @@ CREATE TABLE pedidos (
     FOREIGN KEY (comic_id) REFERENCES comics(id) ON DELETE CASCADE
 );
 
-INSERT INTO usuarios (id, nombre, correo, password, salt)
-VALUES (1, 'Xewison', 'xewi@example.com', 'contraseña_hasheada', 'salt_value');
+INSERT INTO usuarios (id, nombre, correo, password, salt, rol)
+VALUES (1, 'Xewison', 'xewi@example.com', 'contraseña_hasheada', 'salt_value', 'usuario'),
+(2, 'Raul', 'raulgar@gmail.com', '1234', 'value', 'admin');
 
 INSERT INTO comics (id, nombre, autor, anio, descripcion) VALUES 
 (1, 'Batman: The Dark Knight Returns', 'Frank Miller', 1986, 'Un Bruce Wayne de 55 años vuelve de su retiro para salvar a una Gotham sumida en el caos.'),
@@ -51,5 +53,3 @@ INSERT INTO imagenes (id, comic_id, imagen_url) VALUES
 (7, 3, 'https://covers.openlibrary.org/b/isbn/9780785134503-L.jpg'),
 (8, 3, 'https://covers.openlibrary.org/b/isbn/9781302923747-L.jpg'),
 (9, 3, 'https://covers.openlibrary.org/b/isbn/9781302911843-L.jpg');
-
-

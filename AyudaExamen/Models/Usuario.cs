@@ -13,7 +13,7 @@ namespace AyudaExamen.Models
         [Column("nombre")]
         public string Name { get; set; }
 
-        [Column("email")]
+        [Column("correo")]
         public string Email { get; set; }
 
         [Column("password")]

@@ -10,5 +10,6 @@ namespace AyudaExamen.Data
         public DbSet<Comic> Comics { get; set; }
         public DbSet<Imagen> Imagenes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }
